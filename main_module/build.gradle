@@ -1,0 +1,22 @@
+apply plugin: 'application'
+
+mainClassName = 'org.example.engine.Main'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile project(":first_module")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest.attributes("Main-Class": mainClassName)
+    manifest.attributes("Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+}
